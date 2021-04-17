@@ -143,7 +143,7 @@ MacPorts_MARK='MCP'; MacPorts_PM='port'        ; MacPorts_COMMAND="$PERMISSION_C
      MAS_MARK='MAS';      MAS_PM='mas'         ;      MAS_COMMAND="$MAS_PM install"
      SBO_MARK='SBO';      SBO_PM='sbopkg'      ;      SBO_COMMAND="$PERMISSION_COMMAND $SBO_PM -ifq"
     Snap_MARK='SNA';     Snap_PM='snap'        ;     Snap_COMMAND="$PERMISSION_COMMAND $Snap_PM install"
-    pipx_MARK='PIX';     pipx_PM='pipx'        ;     pipx_COMMAND="$PERMISSION_COMMAND python3 -m $pipx_PM install"
+    pipx_MARK='PIX';     pipx_PM='pipx'        ;     pipx_COMMAND="python3 -m $pipx_PM install"
 
 if [ -z "$PACKAGEMANAGER_MAIN" ]; then
 	case $(uname -s | tr '[:upper:]' '[:lower:]') in
