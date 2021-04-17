@@ -143,6 +143,7 @@ MacPorts_MARK='MCP'; MacPorts_PM='port'        ; MacPorts_COMMAND="$PERMISSION_C
      MAS_MARK='MAS';      MAS_PM='mas'         ;      MAS_COMMAND="$MAS_PM install"
      SBO_MARK='SBO';      SBO_PM='sbopkg'      ;      SBO_COMMAND="$PERMISSION_COMMAND $SBO_PM -ifq"
     Snap_MARK='SNA';     Snap_PM='snap'        ;     Snap_COMMAND="$PERMISSION_COMMAND $Snap_PM install"
+    pipx_MARK='PIX';     pipx_PM='pipx'        ;     pipx_COMMAND="$PERMISSION_COMMAND $pipx_PM install"
 
 if [ -z "$PACKAGEMANAGER_MAIN" ]; then
 	case $(uname -s | tr '[:upper:]' '[:lower:]') in
@@ -174,6 +175,7 @@ if [ -z "$PACKAGEMANAGER_MAIN" ]; then
 			[ "$PACKAGEMANAGER_MAIN"  = 'Slackpkg' ] && PACKAGEMANAGER_LIST="$PACKAGEMANAGER_LIST SBO"
 			                                            PACKAGEMANAGER_LIST="$PACKAGEMANAGER_LIST Flatpak"
 			                                            PACKAGEMANAGER_LIST="$PACKAGEMANAGER_LIST Homebrew"
+			                                            PACKAGEMANAGER_LIST="$PACKAGEMANAGER_LIST pipx"
 
 			if [ "$PACKAGEMANAGER_MAIN" = 'APT' ] || [ "$PACKAGEMANAGER_MAIN" = 'Pacman' ]; then
 				PACKAGEMANAGER_LIST="$PACKAGEMANAGER_LIST Snap"
@@ -380,6 +382,14 @@ superbbootstrap_Snap() {
 	fi
 
 	snap install core
+}
+
+superbbootstrap_pipx() {
+	if [ ! -x "$(command -v 'pipx')" ]; then
+		python3 -m ensurepip
+		python3 -m pip install --user pipx
+		python3 -m pipx ensurepath  # note: if you change default shell after the installation you may need to run this command again in order to use installed packages
+	fi
 }
 
 superbbootstrap_batch_symlink() {
